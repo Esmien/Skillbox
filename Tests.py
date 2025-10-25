@@ -1,14 +1,9 @@
-def check_number(number):
-    return count_number_len(number) > 4
-
-def count_number_len(x):
-    count = 0
-    while x:
-        count += 1
-        x //= 10
-
-x = 1234
-if check_number(x):
-    print("1")
-else:
-    print("2")
+# educational_grant = 10000
+# expenses = 12000
+parents_money = 0
+for month in range(1, 11):
+    lost_money = expenses - educational_grant
+    print(f'{month} месяц: траты {expenses} рублей, не хватает {lost_money} рублей.')
+    expenses += int(expenses*0.03)
+    parents_money += lost_money
+print(f'Сумма денег, которую необходимо получить у родителей: {parents_money} рублей.')
