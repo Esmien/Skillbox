@@ -31,10 +31,7 @@ def maximum_of_two(a, b):
         return b
 
 def maximum_of_three(a, b, c):
-    if maximum_of_two(a, b) > c:
-        return maximum_of_two(a, b)
-    else:
-        return c
+    return maximum_of_two(maximum_of_two(a, b), c)
 nums = []
 for _ in range(3):
     nums.append(int(input('Введите число: ')))

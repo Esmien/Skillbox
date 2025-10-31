@@ -19,16 +19,17 @@ def convert_float_to_exp(number):
     exponent = 0
     num = number
     if  1 <= number:
-        while num // 10 > 0:
+        while num >= 10:
             exponent += 1
-            num //= 10
+            num /= 10
     elif 0 < number < 1:
-        while num % 10 <= 1:
+        while num < 1:
             exponent -= 1
             num *= 10
     else:
         return f'Число должно быть положительным'
-    return f'x = {number / 10 ** exponent} * 10 ** {exponent}'
+    mantissa = round(num, 10)
+    return f'x = {mantissa} * 10 ** {exponent}'
 while True:
     try:
         user_input = float(input('Введите число: '))

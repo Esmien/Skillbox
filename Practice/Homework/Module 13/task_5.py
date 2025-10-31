@@ -26,6 +26,15 @@ def count_of_moves(start, end_):
         start *= 0.916
     return result
 
-start_amplitude = float(input('Введите начальную амплитуду: '))
-end_amplitude = float(input('Введите конечную амплитуду: '))
-print(f'Маятник считается остановившимся через {count_of_moves(start_amplitude, end_amplitude)} колебаний')
+while True:
+    try:
+        start_amplitude = float(input('Введите начальную амплитуду: '))
+        end_amplitude = float(input('Введите конечную амплитуду: '))
+        if (start_amplitude < end_amplitude) or start_amplitude < 0 or end_amplitude < 0:
+            print('Начальная амплитуда не может быть больше конечной и оба числа должны быть положительными! Попробуйте ещё раз')
+            continue
+    except ValueError:
+        print('Ошибка! Требуется ввести числа')
+        continue
+    print(f'Маятник считается остановившимся через {count_of_moves(start_amplitude, end_amplitude)} колебаний')
+    break

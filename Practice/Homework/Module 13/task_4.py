@@ -75,9 +75,10 @@ def main():
             print('Ошибка! Нужно ввести целые числа')
             continue
         break
-
-    print(f'Измененное первое число: {change_number(first_num)}')
-    print(f'Измененное второе число: {change_number(second_num)}')
-    print('\nСумма чисел:', change_number(first_num) + change_number(second_num))
+    first_changed_number = change_number(first_num)
+    second_changed_number = change_number(second_num)
+    print(f'Измененное первое число: {first_changed_number}')
+    print(f'Измененное второе число: {second_changed_number}')
+    print('\nСумма чисел:', first_changed_number + second_changed_number)
 
 main()
