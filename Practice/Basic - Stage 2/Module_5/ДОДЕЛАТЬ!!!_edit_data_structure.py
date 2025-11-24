@@ -1,5 +1,5 @@
-#Нихуя не работает, доделать!!!!
-def check_filename(filename):
+def check_filename(filename: str) -> bool:
+    """Проверяет имя файла на валидность"""
     if not filename:
         return False
     broken_syms = ('@', '№', '$', '%', '^', '&', '*', '(', ')')
@@ -9,45 +9,52 @@ def check_filename(filename):
     if filename.startswith(broken_syms):
         return False
     return True
-def find_longest_filename(filename):
-    if not filename:
-        return 0
-    return max(len(f) for f in filename)
 
-def find_valid_files(filenames_list):
+# def find_longest_filename(data):
+#     max_length = 0
+#     if not data:
+#         return 0
+#     for row in data:
+#         filenames = row[1]
+#         current_length = max(len(f) for f in filenames)
+#         if current_length > max_length:
+#             max_length = current_length
+#     return max_length
+
+def find_valid_files(filenames_list: str) -> list[str]:
+    """Проверяет имена файлов на валидность"""
     if not filenames_list:
         return []
-    files = filenames_list[0].split()
+    files = filenames_list.split()
     valid_files = [f for f in files if check_filename(f)]
-    return valid_files
+    if len(valid_files) == 3:
+        return valid_files
+    return []
 
-def check_ip(ip_string):
+def check_ip(ip_string: str) -> bool:
+    """Проверяет IP на соответствие формату"""
     sector = ip_string.split('.')
     if len(sector) != 4:
         return False
     else:
         for part in sector:
             try:
-                if int(part) < 0 or int(part) > 255:
+                if not 0 <= int(part) <= 255:
                     return False
             except ValueError:
                 return False
     return True
 
-def check_right(data):
+def check_right(data: list) -> list:
+    """Проверяет данные в структуре на полное соответствие критериям"""
     completed_data = []
-    max_length = 0
     for row in data:
-        if check_ip(row[0]):
-            valid_files = find_valid_files(row[1])
-            if valid_files:
-                current_max = find_longest_filename(valid_files)
-                max_length = max(max_length, current_max)
-    for row in data:
-        if check_ip(row[0]):
-            valid_files = find_valid_files(row[1])
-            if valid_files and find_longest_filename(valid_files) == max_length:
-                completed_data.append([row[0], [' '.join(valid_files)]])
+        ip = row[0]
+        filenames = row[1]
+        # curr_len = max(len(f) for f in filenames) - не понадобилось
+        if (find_valid_files(filenames[0]) and
+                check_ip(ip)):
+            completed_data.append(row)
     return completed_data
 def main():
     data = [
@@ -60,9 +67,10 @@ def main():
         ["10.20.30.40", ["file_432.txt  analysis_results.txt notes1998.txt"]],
     ]
     result = check_right(data)
-    print(check_right(data))
+    print('[')
     for row in result:
-        print(row)
+        print("   ",row)
+    print(']')
 
 if __name__ == '__main__':
     main()
